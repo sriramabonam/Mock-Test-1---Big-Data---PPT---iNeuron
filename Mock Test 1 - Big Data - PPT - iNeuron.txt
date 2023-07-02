@@ -1,0 +1,80 @@
+1. Ans
+
+from pyspark.sql import SparkSession 
+spark = SparkSession.builder.getOrCreate() 
+df = spark.read.csv("employees.csv", header=True) 
+df.show(10)
+
+2. Ans
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import sum
+spark = SparkSession.builder.getOrCreate()
+total_revenue_per_product = sales_data.groupBy("product_name").agg(sum("revenue").alias("total_revenue")).orderBy("total_revenue", ascending=False)
+total_revenue_per_product.show()
+
+3. Ans
+
+from pyspark.sql import SparkSession 
+spark = SparkSession.builder.getOrCreate() 
+df = spark.read.json("students.json") 
+filtered_df = df.filter(df.age > 18) 
+filtered_df.show()
+
+4. Ans
+
+from pyspark.sql import 
+SparkSession from pyspark.sql.functions import 
+avg spark = SparkSession.builder.getOrCreate() 
+avg_amount_per_user = transactions.groupBy("user_id").agg(avg("amount").alias("avg_amount")) 
+avg_amount_per_user.show()
+
+5.Ans
+
+from pyspark.sql import SparkSession 
+from pyspark.sql.functions 
+import hour, count spark = SparkSession.builder.getOrCreate() 
+event_count_per_hour = logs.groupBy(hour("timestamp").alias("hour")).agg(count("event").alias("event_count")).orderBy("hour") 
+event_count_per_hour.show()
+
+6. Ans
+
+SELECT *
+FROM Customers
+WHERE age > 25
+  AND customer_id IN (
+    SELECT customer_id
+    FROM Purchases
+    WHERE customer_id = Customers.customer_id
+  );
+
+7. Ans
+
+SELECT customer_id, COUNT(*) AS order_count
+FROM Orders
+GROUP BY customer_id
+ORDER BY order_count DESC;
+
+8. Ans
+
+SELECT name
+FROM Products
+WHERE stock_quantity = 0;
+
+9.Ans
+
+SELECT category_name, AVG(price) AS average_price
+FROM Products
+GROUP BY category_name;
+
+
+10. Ans
+
+SELECT customer_id, SUM(amount) AS total_amount
+FROM Purchases
+GROUP BY customer_id
+ORDER BY total_amount DESC
+LIMIT 5;
+
+
+
